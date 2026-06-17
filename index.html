@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Portfolio</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#05010d;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* SCROLLBAR */
+
+    ::-webkit-scrollbar{
+      width:8px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#8b5cf6;
+      border-radius:20px;
+    }
+
+    /* BACKGROUND */
+
+    .bg-glow{
+      position:fixed;
+      width:800px;
+      height:800px;
+      background:#7b2cff;
+      filter:blur(220px);
+      opacity:0.25;
+      top:20%;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:-1;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:30px 80px;
+      position:fixed;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(10px);
+      background:rgba(0,0,0,0.2);
+    }
+
+    .logo{
+      font-size:32px;
+      font-weight:800;
+    }
+
+    .email{
+      font-size:20px;
+      font-weight:500;
+    }
+
+    .menu{
+      display:flex;
+      gap:50px;
+    }
+
+    .menu a{
+      text-decoration:none;
+      color:white;
+      font-size:20px;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .menu a:hover{
+      color:#b983ff;
+    }
+
+    /* HERO */
+
+    .hero{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:120px 80px 0;
+      position:relative;
+    }
+
+    /* LEFT */
+
+    .left{
+      width:30%;
+      z-index:5;
+    }
+
+    .left h2{
+      color:#c59cff;
+      font-size:55px;
+      font-weight:300;
+      margin-bottom:10px;
+    }
+
+    .left h1{
+      font-size:78px;
+      line-height:1;
+      font-weight:700;
+      letter-spacing:2px;
+    }
+
+    /* CENTER */
+
+    .center{
+      width:40%;
+      display:flex;
+      justify-content:center;
+      position:relative;
+    }
+
+    .avatar{
+      width:700px;
+      max-width:100%;
+      z-index:5;
+      animation:float 4s ease-in-out infinite;
+      filter:drop-shadow(0 0 60px #b983ff);
+    }
+
+    @keyframes float{
+
+      0%{
+        transform:translateY(0px);
+      }
+
+      50%{
+        transform:translateY(-20px);
+      }
+
+      100%{
+        transform:translateY(0px);
+      }
+    }
+
+    /* PURPLE CIRCLE */
+
+    .circle{
+      position:absolute;
+      top:20px;
+      width:90px;
+      height:90px;
+      background:#ddb6ff;
+      border-radius:50%;
+      box-shadow:0 0 50px #b983ff;
+    }
+
+    /* RIGHT */
+
+    .right{
+      width:30%;
+      text-align:right;
+      z-index:5;
+    }
+
+    .right p{
+      font-size:55px;
+      color:#d6b5ff;
+      font-weight:300;
+    }
+
+    .right h1{
+      font-size:75px;
+      line-height:1;
+      font-weight:800;
+      text-transform:uppercase;
+      background:linear-gradient(to right,#ffffff,#8b5cf6);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    /* SOCIAL */
+
+    .social{
+      position:fixed;
+      left:40px;
+      bottom:60px;
+      display:flex;
+      flex-direction:column;
+      gap:35px;
+      z-index:999;
+    }
+
+    .social a{
+      color:white;
+      font-size:35px;
+      transition:0.3s;
+    }
+
+    .social a:hover{
+      color:#b983ff;
+      transform:scale(1.2);
+    }
+
+    /* RESUME */
+
+    .resume{
+      position:fixed;
+      right:60px;
+      bottom:60px;
+      font-size:25px;
+      letter-spacing:8px;
+      color:#666;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      z-index:999;
+    }
+
+    /* SECTION */
+
+    section{
+      padding:120px 80px;
+    }
+
+    .title{
+      text-align:center;
+      font-size:60px;
+      margin-bottom:60px;
+      color:#b983ff;
+    }
+
+    /* ABOUT */
+
+    .about-content{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .about-content img{
+      width:100%;
+      border-radius:30px;
+      box-shadow:0 0 40px #8b5cf6;
+    }
+
+    .about-text h3{
+      font-size:40px;
+      margin-bottom:20px;
+    }
+
+    .about-text p{
+      font-size:20px;
+      line-height:1.8;
+      color:#ccc;
+    }
+
+    /* SKILLS */
+
+    .skills{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .skill-box{
+      background:#12071f;
+      padding:40px;
+      border-radius:20px;
+      text-align:center;
+      transition:0.4s;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    .skill-box:hover{
+      transform:translateY(-10px);
+      box-shadow:0 0 40px #8b5cf6;
+    }
+
+    .skill-box i{
+      font-size:50px;
+      margin-bottom:20px;
+      color:#b983ff;
+    }
+
+    .skill-box h3{
+      font-size:28px;
+    }
+
+    /* PROJECTS */
+
+    .projects{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .project-card{
+      background:#12071f;
+      padding:30px;
+      border-radius:20px;
+      transition:0.4s;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    .project-card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 0 40px #8b5cf6;
+    }
+
+    .project-card img{
+      width:100%;
+      border-radius:15px;
+      margin-bottom:20px;
+    }
+
+    .project-card h3{
+      font-size:30px;
+      margin-bottom:15px;
+    }
+
+    .project-card p{
+      color:#bbb;
+      line-height:1.7;
+    }
+
+    /* CONTACT */
+
+    .contact{
+      max-width:700px;
+      margin:auto;
+    }
+
+    .contact input,
+    .contact textarea{
+      width:100%;
+      padding:20px;
+      margin-bottom:20px;
+      border:none;
+      border-radius:15px;
+      background:#12071f;
+      color:white;
+      font-size:18px;
+      outline:none;
+    }
+
+    .btn{
+      width:100%;
+      padding:20px;
+      border:none;
+      border-radius:15px;
+      background:#8b5cf6;
+      color:white;
+      font-size:20px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      background:#a855f7;
+    }
+
+    /* FOOTER */
+
+    footer{
+      text-align:center;
+      padding:30px;
+      background:#090312;
+      color:#999;
+      font-size:18px;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:1200px){
+
+      .hero{
+        flex-direction:column;
+        text-align:center;
+        gap:40px;
+      }
+
+      .left,
+      .center,
+      .right{
+        width:100%;
+      }
+
+      .right{
+        text-align:center;
+      }
+
+      .left h1,
+      .right h1{
+        font-size:45px;
+      }
+
+      .avatar{
+        width:350px;
+      }
+
+      nav{
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .menu{
+        gap:20px;
+      }
+
+      .social{
+        flex-direction:row;
+        position:relative;
+        left:0;
+        justify-content:center;
+        margin-top:40px;
+      }
+
+      .resume{
+        position:relative;
+        right:0;
+        justify-content:center;
+        margin-top:20px;
+      }
+
+      .about-content{
+        grid-template-columns:1fr;
+      }
+
+      section{
+        padding:80px 30px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+
+    <div class="logo">RH</div>
+
+    <div class="email">
+      lvilohka4@gmail.com
+    </div>
+
+    <div class="menu">
+      <a href="#about">ABOUT</a>
+      <a href="#work">WORK</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <!-- LEFT -->
+    <div class="left">
+      <h2>Hello! I'm</h2>
+      <h1>Gursharan Singh</h1>
+    </div>
+
+    <!-- CENTER -->
+    <div class="center">
+
+      <div class="circle"></div>
+
+      <!-- AVATAR -->
+      <!-- <img
+      class="avatar"
+      <!-- <!-- src="https://i.ibb.co/xq7Qm0T/3d-boy.png" --> -->
+      alt="avatar"> -->
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <p>An</p>
+      <h1>COMPUTER SCIENCE & ENGINEER</h1>
+      <h1>WEB DEVELOPER</h1>
+    </div>
+
+  </section>
+
+  <!-- SOCIAL -->
+  <div class="social">
+
+    <a href="#"><i class="fab fa-github"></i></a>
+
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+    <a href="#"><i class="fab fa-x-twitter"></i></a>
+
+    <a href="#"><i class="fab fa-instagram"></i></a>
+
+  </div>
+
+  <!-- RESUME -->
+  <div class="resume">
+    RESUME
+    <i class="fa-regular fa-file-lines"></i>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+
+    <h1 class="title">About Me</h1>
+
+    <div class="about-content">
+
+      <!-- <img src="images/lvit.jpeg" alt="about">  -->
+      <img src="https://www.magnific.com/free-photos-vectors/portfolio-background" alt="Profile">
+
+      <div class="about-text">
+
+        <h3>web Developer & Computer science  Engineer</h3>
+
+        <p>
+          I create futuristic  websites, modern web applications,
+          machine learning solutions, and responsive user interfaces with
+          powerful animations and modern technologies.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+
+    <h1 class="title">Skills</h1>
+
+    <div class="skills">
+
+      <div class="skill-box">
+        <i class="fab fa-html5"></i>
+        <h3>HTML5</h3>
+      </div>
+
+      <div class="skill-box">
+        <i class="fab fa-css3-alt"></i>
+        <h3>CSS3</h3>
+      </div>
+
+      <div class="skill-box">
+        <i class="fab fa-js"></i>
+        <h3>JavaScript</h3>
+      </div>
+
+      <div class="skill-box">
+        <i class="fab fa-react"></i>
+        <h3>React</h3>
+      </div>
+
+      <div class="skill-box">
+        <i class="fab fa-react"></i>
+        <h3>PYTHON</h3>
+      </div>
+
+      <div class="skill-box">
+        <i class="fab fa-react"></i>
+        <h3>PHP</h3>
+      </div>
+
+       <div class="skill-box">
+        <i class="fab fa-react"></i>
+        <h3>jquery</h3>
+      </div>
+
+
+    </div>
+
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="work">
+
+    <h1 class="title">Projects</h1>
+
+    <div class="projects">
+
+      <div class="project-card">
+
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop">
+
+        <h3>AI Dashboard</h3>
+
+        <p>
+          Modern AI dashboard with futuristic UI and real-time analytics.
+        </p>
+
+      </div>
+
+      <div class="project-card">
+
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop">
+
+        <h3>Portfolio Website</h3>
+
+        <p>
+          Creative animated portfolio website with 3D avatar integration.
+        </p>
+
+      </div>
+
+      <div class="project-card">
+
+        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop">
+
+        <h3>Machine Learning App</h3>
+
+        <p>
+          AI-powered machine learning web application using Python APIs.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+  <!-- CONTACT -->
+<section id="contact">
+
+  <h1 class="title">Contact Me</h1>
+
+  <div class="contact">
+
+    <form action="https://formsubmit.co/lvilohka@gmail.com" method="POST">
+
+      <!-- Disable captcha -->
+      <input type="hidden" name="_captcha" value="false">
+
+      <!-- Email subject -->
+      <input type="hidden" name="_subject" value="New Portfolio Contact Message">
+
+      <!-- Redirect after submit -->
+      <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
+
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        required
+      >
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Your Email"
+        required
+      >
+
+      <textarea
+        name="message"
+        rows="6"
+        placeholder="Your Message"
+        required
+      ></textarea>
+
+      <button type="submit" class="btn">
+        Send Message
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+  <!-- <section id="contact">
+
+    <h1 class="title">Contact Me</h1>
+
+    <div class="contact">
+
+      <input type="text" placeholder="Your Name">
+
+      <input type="email" placeholder="Your Email">
+
+      <textarea rows="6" placeholder="Your Message"></textarea>
+
+      <button class="btn">Send Message</button>
+
+    </div>
+
+  </section> -->
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Gursharan Singh |  Portfolio Website
+  </footer>
+
+</body>
+</html>
